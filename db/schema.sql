@@ -1,11 +1,10 @@
 -- db/schema.sql
-DROP DATABASE IF EXISTS jwt_auth;
+DROP DATABASE IF EXISTS fiber_creations;
 
-CREATE DATABASE jwt_auth;
+CREATE DATABASE fiber_creations;
 
 
-\c jwt_auth
-
+\c fiber_creations
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -14,6 +13,26 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE creations (
+    id SERIAL PRIMARY KEY,
+    creation_type TEXT,
+    stitch TEXT DEFAULT NULL,
+    material TEXT NOT NULL,
+    image VARCHAR,
+    description VARCHAR(500),
+    for_sale BOOLEAN,
+    price NUMERIC DEFAULT NULL,
+    is_favorite BOOLEAN DEFAULT false,
+    created_at DATE,
+    updated_at DATE,
+    user_id INTEGER
+);
+
+CREATE TABLE favorites (
+    user_id INTEGER,
+    creations_id INTEGER
 );
 
 
