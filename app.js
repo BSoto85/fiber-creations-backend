@@ -5,6 +5,7 @@ const cron = require("node-cron");
 const cookieParser = require("cookie-parser");
 
 const authController = require("./controllers/authController");
+const creationController = require("./controllers/creationController");
 
 // CONFIGURATION
 const app = express();
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authController);
+app.use("/api/creations", creationController);
 
 // ROUTES
 app.get("/", (_req, res) => {

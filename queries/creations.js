@@ -3,6 +3,7 @@ const db = require("../db/dbConfig");
 const getAllCreations = async () => {
   try {
     const allCreations = await db.any("SELECT * FROM creations");
+    console.log(allCreations, "Get all creations");
     return allCreations;
   } catch (error) {
     return error;
