@@ -1,17 +1,17 @@
 const express = require("express");
 
 const {
-  getAllCreations,
+  getUserAndAllCreations,
   getOneCreation,
   createCreation,
   deleteCreation,
   updateCreation,
 } = require("../queries/creations");
 
-const creations = express.Router();
+const creations = express.Router({ mergeParams: true });
 
 creations.get("/", async (req, res) => {
-  const allCreations = await getAllCreations();
+  const allCreations = await getUserAndAllCreations();
   if (allCreations.length > 0) {
     res.status(200).json(allCreations);
   } else {

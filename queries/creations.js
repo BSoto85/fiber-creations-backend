@@ -1,9 +1,11 @@
 const db = require("../db/dbConfig");
 
-const getAllCreations = async () => {
+const getUserAndAllCreations = async () => {
   try {
-    const allCreations = await db.any("SELECT * FROM creations");
-    return allCreations;
+    const userAndAllCreations = await db.any(
+      "SELECT creations.*, users.username FROM creations LEFT JOIN users ON creations.user_id = users.id"
+    );
+    return userAndAllCreations;
   } catch (error) {
     return error;
   }
@@ -101,7 +103,7 @@ const updateCreation = async (creation) => {
 };
 
 module.exports = {
-  getAllCreations,
+  getUserAndAllCreations,
   getOneCreation,
   createCreation,
   deleteCreation,

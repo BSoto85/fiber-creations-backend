@@ -25,8 +25,8 @@ CREATE TABLE creations (
     for_sale BOOLEAN,
     price NUMERIC DEFAULT NULL,
     is_favorite BOOLEAN DEFAULT false,
-    created_at DATE,
-    updated_at DATE,
+    created_at TEXT,
+    updated_at TEXT,
     user_id INTEGER
 );
 
