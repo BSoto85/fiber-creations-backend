@@ -11,10 +11,13 @@ const getUserAndAllCreations = async () => {
   }
 };
 
-const getOneCreation = async (id) => {
+const getOneCreationAndUser = async (id) => {
   try {
-    const oneCreation = await db.one("SELECT * FROM creations WHERE id=$1", id);
-    return oneCreation;
+    const oneCreationAndUser = await db.one(
+      "SELECT creations.*, users.username FROM creations LEFT JOIN users ON creations.user_id = users.id WHERE creations.id=$1",
+      id
+    );
+    return oneCreationAndUser;
   } catch (error) {
     return error;
   }
@@ -104,7 +107,7 @@ const updateCreation = async (creation) => {
 
 module.exports = {
   getUserAndAllCreations,
-  getOneCreation,
+  getOneCreationAndUser,
   createCreation,
   deleteCreation,
   updateCreation,

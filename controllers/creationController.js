@@ -2,7 +2,7 @@ const express = require("express");
 
 const {
   getUserAndAllCreations,
-  getOneCreation,
+  getOneCreationAndUser,
   createCreation,
   deleteCreation,
   updateCreation,
@@ -21,7 +21,7 @@ creations.get("/", async (req, res) => {
 
 creations.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const oneCreation = await getOneCreation(id);
+  const oneCreation = await getOneCreationAndUser(id);
   if (oneCreation) {
     res.status(200).json(oneCreation);
   } else {
