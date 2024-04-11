@@ -1,4 +1,5 @@
 const express = require("express");
+const { authenticateToken } = require("../middlewares/authenticateToken");
 
 const {
   getUserAndAllCreations,
@@ -29,7 +30,7 @@ creations.get("/:id", async (req, res) => {
   }
 });
 
-creations.post("/", async (req, res) => {
+creations.post("/", authenticateToken, async (req, res) => {
   const createOneCreation = await createCreation(req.body);
   if (createOneCreation.id) {
     res.status(200).json(createOneCreation);
@@ -48,7 +49,7 @@ creations.delete("/:id", async (req, res) => {
   }
 });
 
-creations.put("/:id", async (req, res) => {
+creations.put("/:id", authenticateToken, async (req, res) => {
   const { id } = req.params;
   const updatedCreation = await updateCreation({ id, ...req.body });
   if (updatedCreation.id) {

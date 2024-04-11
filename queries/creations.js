@@ -33,12 +33,11 @@ const createCreation = async (creation) => {
       description,
       for_sale,
       price,
-      is_favorite,
       created_at,
       user_id,
     } = creation;
     const newCreation = await db.one(
-      "INSERT INTO creations (creation_type, stitch, material, image, description, for_sale, price, is_favorite, created_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+      "INSERT INTO creations (creation_type, stitch, material, image, description, for_sale, price, created_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
       [
         creation_type,
         stitch,
@@ -47,13 +46,13 @@ const createCreation = async (creation) => {
         description,
         for_sale,
         price,
-        is_favorite,
         created_at,
         user_id,
       ]
     );
     return newCreation;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
@@ -80,12 +79,11 @@ const updateCreation = async (creation) => {
       description,
       for_sale,
       price,
-      is_favorite,
       updated_at,
       id,
     } = creation;
     const updatedCreation = await db.one(
-      "UPDATE creations SET creation_type=$1, stitch=$2, material=$3, image=$4, description=$5, for_sale=$6, price=$7, is_favorite=$8, updated_at=$9 WHERE id=$10 RETURNING *",
+      "UPDATE creations SET creation_type=$1, stitch=$2, material=$3, image=$4, description=$5, for_sale=$6, price=$7, updated_at=$8 WHERE id=$9 RETURNING *",
       [
         creation_type,
         stitch,
@@ -94,7 +92,6 @@ const updateCreation = async (creation) => {
         description,
         for_sale,
         price,
-        is_favorite,
         updated_at,
         id,
       ]

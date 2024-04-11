@@ -17,16 +17,16 @@ CREATE TABLE users (
 
 CREATE TABLE creations (
     id SERIAL PRIMARY KEY,
-    creation_type TEXT,
+    creation_type TEXT NOT NULL,
     stitch TEXT DEFAULT NULL,
     material TEXT NOT NULL,
-    image VARCHAR,
-    description VARCHAR(500),
+    image TEXT NOT NULL,
+    description VARCHAR(500) DEFAULT NULL,
     for_sale BOOLEAN,
     price NUMERIC DEFAULT NULL,
     is_favorite BOOLEAN DEFAULT false,
     created_at TEXT,
-    updated_at TEXT,
+    updated_at TEXT DEFAULT NULL,
     user_id INTEGER
 );
 
