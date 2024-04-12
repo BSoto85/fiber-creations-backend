@@ -18,3 +18,12 @@ VALUES
 ('Blanket', 'Virus pattern', 'Acrylic', 'https://res.cloudinary.com/dnqfg86zq/image/upload/c_fill,w_300,h_300/v1712613845/20180805_123500_qt4glj.jpg', 'Square virus pattern baby blanket. Used the colors purple, white, grey, yellow, and teal, with a teal ribbon woven around the edge.', false, NULL, true, '2018-08-05', NULL, 2),
 ('Amigurumi', NULL, 'Acrylic', 'https://res.cloudinary.com/dnqfg86zq/image/upload/c_fill,w_300,h_300/v1712614182/IMG_5362_ro39m2.jpg', 'First attempt at an amigurumi. Cat made in the image of a friends late kitty. 12in tall.', false, NULL, false, '2021-08-24', NULL, 1),
 ('Scarf', 'Waffle', 'Acrylic', 'https://res.cloudinary.com/dnqfg86zq/image/upload/c_fill,w_300,h_300/v1712614436/IMG_3671_xnpv6m.jpg', '6ft scarf made with variegated yarn using the waffle stitch.', true, 19.99, false, '2020-03-01', NULL, 1);
+
+INSERT INTO carts (user_id, created_at, updated_at)
+VALUES
+(1, NOW(), NOW()),
+(2, NOW(), NOW());
+
+INSERT INTO cart_items (cart_id, creation_id)
+VALUES
+(1, 5),

@@ -27,12 +27,21 @@ CREATE TABLE creations (
     is_favorite BOOLEAN DEFAULT false,
     created_at TEXT,
     updated_at TEXT DEFAULT NULL,
-    user_id INTEGER
+    user_id INTEGER REFERENCES users(id)
 );
 
-CREATE TABLE favorites (
-    user_id INTEGER,
-    creations_id INTEGER
+CREATE TABLE carts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+);
+
+CREATE TABLE cart_items (
+    id SERIAL PRIMARY KEY,
+    cart_id INTEGER REFERENCES carts(id),
+    creation_id INTEGER REFERENCES creations(id),
+    ON DELETE CASCADE
 );
 
 
