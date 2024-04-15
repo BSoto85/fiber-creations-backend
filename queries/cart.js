@@ -12,4 +12,27 @@ const addCartToUser = async (user_id) => {
   }
 };
 
-module.exports = { addCartToUser };
+const getCartWithUserId = async (user_id) => {
+  try {
+    const getUserAndCart = await db.any(
+      "SELECT * FROM cart WHERE user_id = $1",
+      [user_id]
+    );
+    return getUserAndCart;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getAllCartItems = async (cart_id) => {
+  try {
+    const getCartItems = await db.any(
+      "SELECT * FROM cart_items WHERE cart_id=$1",
+      [cart_id]
+    );
+    return getCartItems;
+  } catch (error) {
+    return error;
+  }
+};
+module.exports = { addCartToUser, getCartWithUserId, getAllCartItems };

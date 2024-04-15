@@ -30,18 +30,17 @@ CREATE TABLE creations (
     user_id INTEGER REFERENCES users(id)
 );
 
-CREATE TABLE carts (
+CREATE TABLE cart (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE cart_items (
     id SERIAL PRIMARY KEY,
-    cart_id INTEGER REFERENCES carts(id),
-    creation_id INTEGER REFERENCES creations(id),
-    ON DELETE CASCADE
+    cart_id INTEGER REFERENCES cart(id),
+    creation_id INTEGER REFERENCES creations(id)
 );
 
 
