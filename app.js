@@ -31,6 +31,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authController);
 app.use("/api/creations", creationController);
+app.use("/api/cart", cartController);
 
 // ROUTES
 app.get("/", (_req, res) => {

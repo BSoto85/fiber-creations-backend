@@ -14,8 +14,8 @@ const addCartToUser = async (user_id) => {
 
 const getCartWithUserId = async (user_id) => {
   try {
-    const getUserAndCart = await db.any(
-      "SELECT * FROM cart WHERE user_id = $1",
+    const getUserAndCart = await db.one(
+      "SELECT cart.id FROM cart WHERE user_id = $1",
       [user_id]
     );
     return getUserAndCart;
@@ -27,7 +27,7 @@ const getCartWithUserId = async (user_id) => {
 const getAllCartItems = async (cart_id) => {
   try {
     const getCartItems = await db.any(
-      "SELECT * FROM cart_items WHERE cart_id=$1",
+      "SELECT creations.*, cart_items.id AS cart_item_id, cart.id AS cart_id FROM cart_items JOIN cart ON cart_items.cart_id = cart.id JOIN creations ON cart_items.creation_id = creations.id WHERE cart_items.cart_id=$1",
       [cart_id]
     );
     return getCartItems;
@@ -35,4 +35,24 @@ const getAllCartItems = async (cart_id) => {
     return error;
   }
 };
-module.exports = { addCartToUser, getCartWithUserId, getAllCartItems };
+
+const addItemToCart = async (cart_item) => {
+  // console.log("Cart Item", cart_item);
+  try {
+    const addItem = await db.one(
+      "INSERT INTO cart_items (cart_id, creation_id) VALUES($1, $2) RETURNING *",
+      [cart_item.cart_id, cart_item.creation_id]
+    );
+    // console.log("---------", addItem);
+    return addItem;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = {
+  addCartToUser,
+  getCartWithUserId,
+  getAllCartItems,
+  addItemToCart,
+};

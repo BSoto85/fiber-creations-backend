@@ -9,7 +9,11 @@ const {
   updateCreation,
 } = require("../queries/creations");
 
+const { addItemToCart, getCartWithUserId } = require("../queries/cart");
+
 const creations = express.Router({ mergeParams: true });
+
+// creations.use("/:id/cart", cart);
 
 creations.get("/", async (req, res) => {
   const allCreations = await getUserAndAllCreations();
@@ -58,5 +62,32 @@ creations.put("/:id", authenticateToken, async (req, res) => {
     res.status(404).json({ error: "Creation not found" });
   }
 });
+
+//api/creations/id/cart/id
+//URL}/api/creations/${oneCreation.id}/cart/${user.id
+// creations.post("/addtocart/:cart_id/:creation_id", async (req, res) => {
+//   console.log(req.params);
+// });
+creations.post(
+  "/:creation_id/cart/:user_id",
+  // authenticateToken,
+  async (req, res) => {
+    const { creation_id, user_id } = req.params;
+    // console.log(creation_id, user_id);
+    const getCartId = await getCartWithUserId(user_id);
+    console.log(getCartId);
+    // console.log(req.body);
+    const addItem = await addItemToCart({
+      cart_id: getCartId.id,
+      creation_id,
+    });
+    console.log("------", addItem);
+    if (addItem.id) {
+      res.status(200).json(addItem);
+    } else {
+      res.status(500).json({ error: "Failed to add item" });
+    }
+  }
+);
 
 module.exports = creations;

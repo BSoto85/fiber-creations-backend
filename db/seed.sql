@@ -19,10 +19,10 @@ VALUES
 ('Amigurumi', NULL, 'Acrylic', 'https://res.cloudinary.com/dnqfg86zq/image/upload/c_fill,w_300,h_300/v1712614182/IMG_5362_ro39m2.jpg', 'First attempt at an amigurumi. Cat made in the image of a friends late kitty. 12in tall.', false, NULL, false, '2021-08-24', NULL, 1),
 ('Scarf', 'Waffle', 'Acrylic', 'https://res.cloudinary.com/dnqfg86zq/image/upload/c_fill,w_300,h_300/v1712614436/IMG_3671_xnpv6m.jpg', '6ft scarf made with variegated yarn using the waffle stitch.', true, 19.99, false, '2020-03-01', NULL, 1);
 
-INSERT INTO cart (user_id, created_at, updated_at)
+INSERT INTO cart (user_id)
 VALUES
-(1, NOW(), NOW()),
-(2, NOW(), NOW());
+(1),
+(2);
 
 INSERT INTO cart_items (cart_id, creation_id)
 VALUES
