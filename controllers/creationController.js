@@ -73,15 +73,11 @@ creations.post(
   // authenticateToken,
   async (req, res) => {
     const { creation_id, user_id } = req.params;
-    // console.log(creation_id, user_id);
     const getCartId = await getCartWithUserId(user_id);
-    console.log(getCartId);
-    // console.log(req.body);
     const addItem = await addItemToCart({
       cart_id: getCartId.id,
       creation_id,
     });
-    console.log("------", addItem);
     if (addItem.id) {
       res.status(200).json(addItem);
     } else {

@@ -1,7 +1,11 @@
 const express = require("express");
 const cart = express.Router({ mergeParams: true });
 
-const { getCartWithUserId, getAllCartItems } = require("../queries/cart");
+const {
+  getCartWithUserId,
+  getAllCartItems,
+  deleteItemFromCart,
+} = require("../queries/cart");
 const { authenticateToken } = require("../middlewares/authenticateToken");
 
 //user id passed from front end will be useOutletContext
@@ -13,7 +17,6 @@ const { authenticateToken } = require("../middlewares/authenticateToken");
 cart.get("/:id", async (req, res) => {
   const { id } = req.params;
   const newCart = await getCartWithUserId(id);
-  // console.log(newCart);
   if (newCart.id) {
     const allItems = await getAllCartItems(newCart.id);
     res.status(200).json(allItems);
@@ -22,6 +25,14 @@ cart.get("/:id", async (req, res) => {
   }
 });
 
-cart.delete("/:creation_id", async (req, res) => {});
+cart.delete("/:cart_item_id", async (req, res) => {
+  const { cart_item_id } = req.params;
+  const deletedItem = await deleteItemFromCart(cart_item_id);
+  if (deletedItem.id) {
+    res.status(200).json(deletedItem);
+  } else {
+    res.status(404).json({ error: "Item not found" });
+  }
+});
 
 module.exports = cart;

@@ -37,14 +37,24 @@ const getAllCartItems = async (cart_id) => {
 };
 
 const addItemToCart = async (cart_item) => {
-  // console.log("Cart Item", cart_item);
   try {
     const addItem = await db.one(
       "INSERT INTO cart_items (cart_id, creation_id) VALUES($1, $2) RETURNING *",
       [cart_item.cart_id, cart_item.creation_id]
     );
-    // console.log("---------", addItem);
     return addItem;
+  } catch (error) {
+    return error;
+  }
+};
+
+const deleteItemFromCart = async (cart_item_id) => {
+  try {
+    const deleteItem = await db.one(
+      "DELETE FROM cart_items WHERE id=$1 RETURNING *",
+      cart_item_id
+    );
+    return deleteItem;
   } catch (error) {
     return error;
   }
@@ -55,4 +65,5 @@ module.exports = {
   getCartWithUserId,
   getAllCartItems,
   addItemToCart,
+  deleteItemFromCart,
 };
