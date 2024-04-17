@@ -22,8 +22,8 @@ cron.schedule("*/5 * * * *", () => {
 // MIDDLEWARE change origin to your frontend netlify address for deployment
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    // origin: "https://main--jwt-auth-10-3.netlify.app/",
+    // origin: "http://localhost:3000",
+    origin: "https://main--jwt-auth-10-3.netlify.app/",
   })
 );
 app.use(express.json());
