@@ -23,7 +23,7 @@ cron.schedule("*/5 * * * *", () => {
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://fibercreations.netlify.app/",
+    origin: "https://fibercreations.netlify.app",
   })
 );
 app.use(express.json());
