@@ -63,11 +63,6 @@ creations.put("/:id", authenticateToken, async (req, res) => {
   }
 });
 
-//api/creations/id/cart/id
-//URL}/api/creations/${oneCreation.id}/cart/${user.id
-// creations.post("/addtocart/:cart_id/:creation_id", async (req, res) => {
-//   console.log(req.params);
-// });
 creations.post(
   "/:creation_id/cart/:user_id",
   // authenticateToken,
